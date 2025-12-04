@@ -21,7 +21,7 @@
       }
     </style>
 
-    <!-- META PIXEL -->
+    <!-- META PIXEL (script pode ficar no head) -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -35,12 +35,7 @@
       fbq('init', '1624264668237002');
       fbq('track', 'PageView');
     </script>
-
-    <noscript>
-      <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1624264668237002&ev=PageView&noscript=1"/>
-    </noscript>
-    <!-- FIM PIXEL -->
+    <!-- FIM META PIXEL -->
 
     <script type="importmap">
     {
@@ -55,10 +50,20 @@
       }
     }
     </script>
-
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- NOSCRIPT do pixel tem que ficar no body para o Vite não quebrar -->
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=1624264668237002&ev=PageView&noscript=1"
+      />
+    </noscript>
+
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
