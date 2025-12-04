@@ -14,10 +14,36 @@ export const ContactForm: React.FC = () => {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate submission
-    setTimeout(() => setSubmitted(true), 1000);
+
+    // Validação mínima
+    if (!formData.name || !formData.phone || !formData.email) {
+      alert('Preencha nome, WhatsApp e e-mail.');
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        'https://n8n.agenteeven.com.br/webhook/4d61f1f4-c457-4983-800a-b20f9373285b',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Erro ao enviar formulário');
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      alert('Ocorreu um erro ao enviar seus dados. Tente novamente em alguns minutos.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
